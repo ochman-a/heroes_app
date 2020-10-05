@@ -60,10 +60,11 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Color(0xFFEAECEE),
         appBar: AppBar(
           title: Text(widget.title),
         ),
-        body: Center(
+        body: Container(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -72,6 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 options: CarouselOptions(height: 530.0, aspectRatio: 2.0),
                 items: bookList
                     .map((item) => Container(
+                          margin: const EdgeInsets.all(8.0),
                           child: Center(
                               child: Image.asset(item,
                                   fit: BoxFit.cover, width: 1000)),
