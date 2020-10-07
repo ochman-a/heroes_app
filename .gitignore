@@ -6,3 +6,9 @@
 .idea/
 
 .packages
+
+build/
+
+.flutter-plugins
+
+.flutter-plugins-dependencies

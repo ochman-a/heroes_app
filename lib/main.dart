@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 final List<String> bookList = [
   'ressources/images/lile-du-roi-lezard.jpg',
@@ -7,8 +10,16 @@ final List<String> bookList = [
   'ressources/images/les-maitres-des-tenebres.jpg'
 ];
 
+Future<String> loadAsset() async {
+  var file = await rootBundle.loadString('ressources/books/books.json');
+  print(file); //Possible de lire ici ! Assets !
+  // https://toastguyz.com/flutter/read-and-write-files-in-flutter
+  return file;
+}
+
 void main() {
   runApp(MyApp());
+  loadAsset();
 }
 
 class MyApp extends StatelessWidget {
@@ -44,17 +55,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  void _no() {
+    setState(() {});
+  }
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+  void _something() {
+    print("I was clicked");
   }
 
   @override
@@ -73,11 +79,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 options: CarouselOptions(height: 530.0, aspectRatio: 2.0),
                 items: bookList
                     .map((item) => Container(
-                          margin: const EdgeInsets.all(8.0),
+                        margin: const EdgeInsets.all(8.0),
+                        child: FlatButton(
+                          onPressed: () => _something(),
                           child: Center(
                               child: Image.asset(item,
                                   fit: BoxFit.cover, width: 1000)),
-                        ))
+                        )))
                     .toList(),
               )
             ],

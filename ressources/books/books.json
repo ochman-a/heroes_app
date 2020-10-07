@@ -3,21 +3,13 @@
         "title": "Le l'abyrinthe de la mort",
         "img": "ressources/images/le-labyrinthe-de-la-mort.jpg",
         "available": false,
-        "text_link": "",
-        "last_chapter": "000",
-        "last_safe_chapter": "000",
-        "player_stats": {},
-        "player_inv": {}
+        "text_link": ""
     },
     "02": {
         "title": "Les maîtres des ténèbres",
         "img": "ressources/images/les-maitres-des-tenebres.jpg",
         "available": false,
-        "text_link": "",
-        "last_chapter": "000",
-        "last_safe_chapter": "000",
-        "player_stats": {},
-        "player_inv": {}
+        "text_link": ""
     },
     "03": {
         "title": "L'île du roi lézard",
