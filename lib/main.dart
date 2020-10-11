@@ -5,8 +5,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'playBook.dart';
 
-String player_file;
+Map<String, dynamic> player_file;
 
 Future<String> get _localPath async {
   final directory = await getApplicationDocumentsDirectory();
@@ -49,6 +50,7 @@ void openPlayerFile() async {
     final file = await _localFile;
 
     String contents = await file.readAsString();
+    player_file = jsonDecode(contents);
     print(contents);
   } catch (e) {
     await _createFile();
@@ -85,21 +87,34 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<String> imgList = [];
+  List<dynamic> imgList = [];
   Map<String, dynamic> playerStats;
 
   void loadAssets() async {
     var file = await rootBundle.loadString('ressources/books/books.json');
     Map<String, dynamic> books = jsonDecode(file);
     for (var book in books.values) {
-      imgList.add(book['img']);
+      var bookInfo = [
+        book["number"],
+        book["title"],
+        book["img"],
+        book["available"],
+        book["text_link"]
+      ];
+      imgList.add(bookInfo);
     }
     setState(() {});
-    // https://toastguyz.com/flutter/read-and-write-files-in-flutter
   }
 
-  void selectBook() {
-    print("I was clicked");
+  void selectBook(var book) {
+    if (book[3] == true) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => PlayBook()),
+      );
+    } else {
+      print("Book not available");
+    }
   }
 
   @override
@@ -115,18 +130,17 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               CarouselSlider(
-                options: CarouselOptions(height: 530.0, aspectRatio: 2.0),
-                items: imgList
-                    .map((item) => Container(
-                        margin: const EdgeInsets.all(8.0),
-                        child: FlatButton(
-                          onPressed: () => selectBook(),
-                          child: Center(
-                              child: Image.asset(item,
-                                  fit: BoxFit.cover, width: 1000)),
-                        )))
-                    .toList(),
-              )
+                  options: CarouselOptions(height: 530.0, aspectRatio: 2.0),
+                  items: imgList
+                      .map((item) => Container(
+                          margin: const EdgeInsets.all(8.0),
+                          child: FlatButton(
+                            onPressed: () => selectBook(item),
+                            child: Center(
+                                child: Image.asset(item[2],
+                                    fit: BoxFit.cover, width: 1000)),
+                          )))
+                      .toList())
             ],
           ),
         ));
