@@ -1,24 +1,23 @@
 {
     "01": {
+        "number": "01",
         "title": "Le l'abyrinthe de la mort",
         "img": "ressources/images/le-labyrinthe-de-la-mort.jpg",
         "available": false,
         "text_link": ""
     },
     "02": {
+        "number": "02",
         "title": "Les maîtres des ténèbres",
         "img": "ressources/images/les-maitres-des-tenebres.jpg",
         "available": false,
         "text_link": ""
     },
     "03": {
+        "number": "03",
         "title": "L'île du roi lézard",
         "img": "ressources/images/lile-du-roi-lezard.jpg",
         "available": true,
-        "text_link": "ressources/books/03.json",
-        "last_chapter": "000",
-        "last_safe_chapter": "000",
-        "player_stats": {},
-        "player_inv": {}
+        "text_link": "ressources/books/03.json"
     }
 }
