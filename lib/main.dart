@@ -72,7 +72,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'L\'application dont vous êtes le héros'),
+      routes: {
+        '/': (context) =>
+            MyHomePage(title: 'L\'application dont vous êtes le héros'),
+        '/play': (context) => PlayBook(),
+      },
     );
   }
 }
@@ -110,7 +114,9 @@ class _MyHomePageState extends State<MyHomePage> {
     if (book[3] == true) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => PlayBook()),
+        MaterialPageRoute(
+            builder: (context) =>
+                PlayBook(selectedBook: book, playerStats: playerStats)),
       );
     } else {
       print("Book not available");
