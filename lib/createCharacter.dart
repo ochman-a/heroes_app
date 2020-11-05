@@ -19,7 +19,7 @@ class _CreateCharacterState extends State<CreateCharacter> {
     loadChapter();
     return Scaffold(
       appBar: AppBar(
-        title: Text("Character Creation"),
+        title: Text("Création de personnage"),
       ),
     );
   }

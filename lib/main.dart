@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:heroes_app/createCharacter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -69,13 +70,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Heroes App',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.blueGrey,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       routes: {
         '/': (context) =>
             MyHomePage(title: 'L\'application dont vous êtes le héros'),
         '/play': (context) => PlayBook(),
+        '/create-character': (context) => CreateCharacter()
       },
     );
   }
@@ -110,22 +112,27 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {});
   }
 
-  void selectBook(var book) {
+  void selectBookNewGame(var book) {
     if (book[3] == true && player_file[book[0]]["last_chapter"] == "000") {
-      /*Navigator.push(
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                CreateCharacter(selectedBook: book, playerStats: playerStats)),
+      );
+    } else {
+      print("Book not available");
+    }
+  }
+
+  void selectBookContinue(var book) {
+    if (book[3] == true && player_file[book[0]]["last_chapter"] != "000") {
+      Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) =>
                 PlayBook(selectedBook: book, playerStats: playerStats)),
-      );*/
-    } else if (book[3] == true &&
-        player_file[book[0]]["last_chapter"] != "000") {
-      /*Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) =>
-                PlayBook(selectedBook: book, playerStats: playerStats)),
-      );*/
+      );
     } else {
       print("Book not available");
     }
@@ -154,16 +161,34 @@ class _MyHomePageState extends State<MyHomePage> {
                                 builder: (BuildContext context) {
                                   return SimpleDialog(
                                     title: Text(item[1]),
-                                    children: <Widget>[
-                                      SimpleDialogOption(
-                                        onPressed: () {},
-                                        child: const Text('Continuer'),
-                                      ),
-                                      SimpleDialogOption(
-                                        onPressed: () {},
-                                        child: const Text('Nouvelle Partie'),
-                                      ),
-                                    ],
+                                    children: player_file[item[0]]
+                                                ["last_chapter"] ==
+                                            "000"
+                                        ? <Widget>[
+                                            SimpleDialogOption(
+                                              onPressed: () {
+                                                selectBookNewGame(item);
+                                              },
+                                              child: Text("Nouvelle partie"),
+                                            )
+                                          ]
+                                        : <Widget>[
+                                            SimpleDialogOption(
+                                              onPressed: () {
+                                                selectBookNewGame(item);
+                                              },
+                                              child: Text("Nouvelle partie"),
+                                            ),
+                                            SimpleDialogOption(
+                                              onPressed: () {
+                                                selectBookContinue(item);
+                                              },
+                                              child: Text(
+                                                  "Continuer - chapitre " +
+                                                      player_file[item[0]]
+                                                          ["last_chapter"]),
+                                            ),
+                                          ],
                                   );
                                 }),
                             child: Center(

@@ -19,7 +19,7 @@ class _PlayBookState extends State<PlayBook> {
     loadChapter();
     return Scaffold(
       appBar: AppBar(
-        title: Text("Second Screen"),
+        title: Text("Jeu"),
       ),
     );
   }
