@@ -111,13 +111,21 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void selectBook(var book) {
-    if (book[3] == true) {
-      Navigator.push(
+    if (book[3] == true && player_file[book[0]]["last_chapter"] == "000") {
+      /*Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) =>
                 PlayBook(selectedBook: book, playerStats: playerStats)),
-      );
+      );*/
+    } else if (book[3] == true &&
+        player_file[book[0]]["last_chapter"] != "000") {
+      /*Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                PlayBook(selectedBook: book, playerStats: playerStats)),
+      );*/
     } else {
       print("Book not available");
     }
@@ -141,7 +149,23 @@ class _MyHomePageState extends State<MyHomePage> {
                       .map((item) => Container(
                           margin: const EdgeInsets.all(8.0),
                           child: FlatButton(
-                            onPressed: () => selectBook(item),
+                            onPressed: () => showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return SimpleDialog(
+                                    title: Text(item[1]),
+                                    children: <Widget>[
+                                      SimpleDialogOption(
+                                        onPressed: () {},
+                                        child: const Text('Continuer'),
+                                      ),
+                                      SimpleDialogOption(
+                                        onPressed: () {},
+                                        child: const Text('Nouvelle Partie'),
+                                      ),
+                                    ],
+                                  );
+                                }),
                             child: Center(
                                 child: Image.asset(item[2],
                                     fit: BoxFit.cover, width: 1000)),
