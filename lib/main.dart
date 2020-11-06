@@ -2,11 +2,12 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:heroes_app/createCharacter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'playBook.dart';
+import 'createCharacter.dart';
+import 'dice.dart';
 
 Map<String, dynamic> player_file;
 
@@ -77,7 +78,8 @@ class MyApp extends StatelessWidget {
         '/': (context) =>
             MyHomePage(title: 'L\'application dont vous êtes le héros'),
         '/play': (context) => PlayBook(),
-        '/create-character': (context) => CreateCharacter()
+        '/create-character': (context) => CreateCharacter(),
+        '/dice': (context) => Dices()
       },
     );
   }

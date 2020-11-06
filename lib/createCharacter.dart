@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dice.dart';
 
 class CreateCharacter extends StatefulWidget {
   CreateCharacter({Key key, this.selectedBook, this.playerStats})
@@ -18,9 +19,9 @@ class _CreateCharacterState extends State<CreateCharacter> {
   Widget build(BuildContext context) {
     loadChapter();
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Création de personnage"),
-      ),
-    );
+        appBar: AppBar(
+          title: Text("Création de personnage"),
+        ),
+        body: Container(margin: const EdgeInsets.all(8.0), child: Dices()));
   }
 }
