@@ -14,6 +14,7 @@ class CreateCharacter extends StatefulWidget {
 
 class _CreateCharacterState extends State<CreateCharacter> {
   void loadChapter() {}
+  int _result = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +23,19 @@ class _CreateCharacterState extends State<CreateCharacter> {
         appBar: AppBar(
           title: Text("Création de personnage"),
         ),
-        body: Container(margin: const EdgeInsets.all(8.0), child: Dices()));
+        body: Container(
+            margin: const EdgeInsets.all(8.0),
+            child: new Column(children: [
+              Text(_result.toString()),
+              Center(
+                  child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        minWidth: 70,
+                        minHeight: 70,
+                        maxWidth: 500,
+                        maxHeight: 150,
+                      ),
+                      child: Dices()))
+            ])));
   }
 }
