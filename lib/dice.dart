@@ -4,6 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 import 'package:zflutter/zflutter.dart';
+import 'singletons/diceData.dart';
+
+//int nbrDice = 0;
 
 class Dices extends StatefulWidget {
   _DicesState createState() => _DicesState();
@@ -46,6 +49,8 @@ class _DicesState extends State<Dices> with SingleTickerProviderStateMixin {
     zRotation = Random().nextDouble() * tau;
     num = Random().nextInt(5) + 1;
     num2 = 6 - Random().nextInt(5);
+    diceData.nbr1 = num;
+    diceData.nbr2 = num2;
   }
 
   @override
