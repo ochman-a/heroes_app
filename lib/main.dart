@@ -8,6 +8,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'playBook.dart';
 import 'createCharacter.dart';
 import 'dice.dart';
+import 'createEquipement.dart';
 
 Map<String, dynamic> player_file;
 
@@ -79,6 +80,7 @@ class MyApp extends StatelessWidget {
             MyHomePage(title: 'L\'application dont vous êtes le héros'),
         '/play': (context) => PlayBook(),
         '/create-character': (context) => CreateCharacter(),
+        '/create-equipment': (context) => CreateEquipment(),
         '/dice': (context) => Dices()
       },
     );

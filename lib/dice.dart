@@ -6,9 +6,11 @@ import 'package:flutter/physics.dart';
 import 'package:zflutter/zflutter.dart';
 import 'singletons/diceData.dart';
 
-//int nbrDice = 0;
+int nbrDice = 1;
 
 class Dices extends StatefulWidget {
+  Dices({Key key, nbrDice}) : super(key: key);
+
   _DicesState createState() => _DicesState();
 }
 
@@ -20,7 +22,6 @@ class _DicesState extends State<Dices> with SingleTickerProviderStateMixin {
   int num2 = 1;
   ZVector rotation = ZVector.zero;
   double zRotation = 0;
-  int nbrDice = 2;
 
   @override
   void initState() {
