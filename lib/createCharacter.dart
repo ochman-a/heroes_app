@@ -33,6 +33,7 @@ class _CreateCharacterState extends State<CreateCharacter> {
   int reroll = 3;
   List<dynamic> selectedBook;
   Map<String, dynamic> playerStats;
+  BuildContext genCtx;
 
   void diceRolled(PointerEvent details) {
     showDialog(
@@ -66,9 +67,9 @@ class _CreateCharacterState extends State<CreateCharacter> {
                                 luck = diceData.nbr2 + 6;
                                 break;
                             }
-                            if (step != 2)
+                            if (step != 2) {
                               step++;
-                            else {
+                            } else {
                               playerStats = {
                                 "last_chapter": "000",
                                 "last_safe_chapter": "000",
@@ -82,11 +83,6 @@ class _CreateCharacterState extends State<CreateCharacter> {
                                 },
                                 "player_inv": {}
                               };
-                              Navigator.pushNamed(
-                                context,
-                                '/create-equipment',
-                                arguments: {selectedBook, playerStats},
-                              );
                             }
                             setState(() {});
                             Navigator.pop(context, 'Accepted');
@@ -107,9 +103,9 @@ class _CreateCharacterState extends State<CreateCharacter> {
                                 luck = diceData.nbr2 + 6;
                                 break;
                             }
-                            if (step != 2)
+                            if (step != 2) {
                               step++;
-                            else {
+                            } else {
                               playerStats = {
                                 "last_chapter": "000",
                                 "last_safe_chapter": "000",
@@ -123,11 +119,6 @@ class _CreateCharacterState extends State<CreateCharacter> {
                                 },
                                 "player_inv": {}
                               };
-                              Navigator.pushNamed(
-                                context,
-                                '/create-equipment',
-                                arguments: {selectedBook, playerStats},
-                              );
                             }
                             setState(() {});
                             Navigator.pop(context, 'Accepted');
@@ -138,9 +129,22 @@ class _CreateCharacterState extends State<CreateCharacter> {
     setState(() {});
   }
 
+  void toCreateEquipment() {
+    print("We finished");
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => CreateEquipment(
+              selectedBook: selectedBook, playerStats: playerStats)),
+    );
+  }
+
   _CreateCharacterState(this.selectedBook, this.playerStats);
   @override
   Widget build(BuildContext context) {
+    if (step == 2) {
+      toCreateEquipment();
+    }
     return Scaffold(
         appBar: AppBar(
           title: Text("Création de personnage"),
